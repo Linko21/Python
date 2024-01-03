@@ -1,15 +1,21 @@
 from openpyxl import Workbook
 #from openpyxl.worksheet.worksheet import Worksheet
 from openpyxl.reader.excel import load_workbook
+import os
 
 wb= Workbook()
-def createFile():
-    a=input('Bitte geben Sie einen Dateinamen ein', )
-    b= a+'.xlsx' 
-    wb.save(b)
+def create_File():  
+    a=input('Bitte geben Sie einen Dateinamen ein\n')
+    b= a+'.xlsx'
+    print('path: '+os.path.abspath(b))
+    if not os.path.exists(b):    
+        wb.save(b)
+        print('new Workbook saved')
+    else:
+        print('use existing Workbook')
     
 def Spaltennamen():
-    c=input('Bitte geben den Dateinamen an', )
+    c=input('Bitte geben den Dateinamen an\n')
     d=c+'.xlsx'
     wb=load_workbook(d)
     ws=wb.active
@@ -21,3 +27,4 @@ def Spaltennamen():
 
 createFile()
 Spaltennamen()
+
