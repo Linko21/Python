@@ -1,8 +1,9 @@
 from openpyxl import Workbook
 wb= Workbook()
 #ws=wb.active
+
 def createFile():
-    a=input('Geben Sie einen Dateinamen ein', )
+    a=input('Bitte geben Sie einen Dateinamen ein', )
     b= a+'.xlsx'
 
     wb.save(b)
