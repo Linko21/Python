@@ -27,15 +27,9 @@ def fill_data(workbook):
     ws['C2'].value = current_time
 
 
-file_name1 = create_empty_excel_file("Bestellungen.xlsx")
-file_name2 = create_empty_excel_file("Buchungen.xlsx")
-file_name3 = create_empty_excel_file("Test3.xlsx")
-wb1 = load_excel_file(file_name1)
-wb2 = load_excel_file(file_name2)
-wb3 = load_excel_file(file_name3)
-fill_data(wb1)
-fill_data(wb2)
-fill_data(wb3)
-wb1.save(file_name1)
-wb2.save(file_name2)
-wb3.save(file_name3)
+filenames = ["Bestellungen.xlsx", "Buchungen.xlsx", "Test3.xlsx"]
+for file_name in filenames:
+    create_empty_excel_file(file_name)
+    wb = load_excel_file(file_name)
+    fill_data(wb)
+    wb.save(file_name)
