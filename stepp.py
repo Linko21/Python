@@ -8,7 +8,7 @@ def create_empty_excel_file():
     file_name = "Test.xlsx"
     workbook = Workbook()
     workbook.save(file_name)
-    return "Test.xlsx"
+    return file_name
 
 
 def load_excel_file(name):
