@@ -4,11 +4,10 @@ from openpyxl import Workbook
 from openpyxl.reader.excel import load_workbook
 
 
-def create_empty_excel_file():
-    file_name = "Test.xlsx"
+def create_empty_excel_file(file_name):
     workbook = Workbook()
     workbook.save(file_name)
-    return "Test.xlsx"
+    return file_name
 
 
 def load_excel_file(name):
@@ -28,7 +27,9 @@ def fill_data(workbook):
     ws['C2'].value = current_time
 
 
-fileName = create_empty_excel_file()
-wb = load_excel_file(fileName)
-fill_data(wb)
-wb.save(fileName)
+filenames = ["Bestellungen.xlsx", "Buchungen.xlsx", "Test3.xlsx"]
+for file_name in filenames:
+    create_empty_excel_file(file_name)
+    wb = load_excel_file(file_name)
+    fill_data(wb)
+    wb.save(file_name)
