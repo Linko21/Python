@@ -30,6 +30,8 @@ def row_and_col_writer():
     ws['B2'].value = 'heute'
     ws['C1'].value = 'Irgendwas'
     ws['C2'].value = 'Toll'
+    #ws['B100'].value = 'Irgendwas'
+    ws['A50'].value = 'Toll'
     wb.save('Test.xlsx')
 
 def row_and_col_reader():
@@ -50,11 +52,18 @@ def row_and_col_reader_2():
             print("["+col_index+","+row_index+"] = "+v)
 
 def internet_solution():
-    print("internet_solution")
-    sheet = load_workbook('Test.xlsx').active
-    for i in range(1, sheet.max_row+1):
-        row = [cell.value for cell in sheet[i]]
-        print("row "+str(i), row)
+    wb.active
+    last_row = (wb.active.max_row+1)
+    new_row = [cell.value for cell in wb.active[last_row]]
+    print(last_row)
+    print(new_row)
+    if new_row is None:
+            new_row['A' + str(last_row)].value = 'Eintrag'
+    for i in range(1, wb.active.max_row+1):
+        row = [cell.value for cell in wb.active[i]]
+        print("Zeile "+str(i), row)
+            
+wb.save('Test.xlsx')           
 
 create_empty_excel_file()
 load_excel_file()
