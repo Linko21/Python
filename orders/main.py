@@ -45,7 +45,7 @@ def create_result():
         elif Datum == Geburtstdatum[5:10]:
             neuer_Preis = f['F'+str(b)].vaule - f['F'+str(b)].vaule * 0.20
             print('Hier steht der neue Preis'+str(neuer_Preis))
-            wb.save('orders.xlsx')       
+            wb.save('orders.xlsx') 
  
     
     # TODO lies beide excel tabellen ein und bestimme den preis pro person, was wer zu zahlen hat
