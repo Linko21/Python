@@ -1,5 +1,5 @@
 from datetime import datetime
-
+import os
 from openpyxl import Workbook
 from openpyxl.reader.excel import load_workbook
 
@@ -33,3 +33,4 @@ for file_name in filenames:
     wb = load_excel_file(file_name)
     fill_data(wb)
     wb.save(file_name)
+    print('saved: '+ os.path.abspath(file_name))
