@@ -18,34 +18,40 @@ def create_result():
     Datum =aktuelles_Datum.strftime('%m-%d')
     wb = Workbook()
     wb = load_workbook("prices.xlsx")
-    d = wb['Preise']
+    Preise = wb['Preise']
     wb = load_workbook('orders.xlsx')
-    f = wb['Bestellungen']
-    print(Datum)
+    Bestellung = wb['Bestellungen']
+    #print(Datum)
     #print(Geburtstdatum[4:10])
-    for a in range (2,d.max_row+1):
-        Gericht = d['A'+str(a)].value
-        print(Gericht)
+    for a in range (2,Preise.max_row+1):
+        Gericht = Preise['A'+str(a)].value
+        #print(Gericht)
     
-    for b in range (2,f.max_row+1):
-        Gericht_Bestellung = f['D'+str(b)].value
-        print(Gericht_Bestellung)
+    for b in range (2,Bestellung.max_row+1):
+        Gericht_Bestellung = Bestellung['D'+str(b)].value
+        #print(Gericht_Bestellung)
     
-    for g in range (2,f.max_row+1):
-        Geburtstdatum = f['C'+str(g)].value
-        #Geburtstdatum = Geburtstdatum.strftime('%d.%m.%y')
-        print(Geburtstdatum[5:10])
+    
         
         if Gericht == Gericht_Bestellung:
-            Preis = d['B'+str(a)].value * f['E'+str(b)].value
-            f['F1'].value = 'Preis in €'
-            f['F'+str(b)].value = str(Preis)
+            Preis = Preise['B'+str(a)].value * Bestellung['E'+str(b)].value
+            Bestellung['F1'].value = 'Preis in €'
+            Bestellung['F'+str(b)].value = str(round(Preis,2))
             print(Preis)
-            wb.save('orders.xlsx')
-        elif Datum == Geburtstdatum[5:10]:
-            neuer_Preis = f['F'+str(b)].vaule - f['F'+str(b)].vaule * 0.20
-            print('Hier steht der neue Preis'+str(neuer_Preis))
-            wb.save('orders.xlsx') 
+            #wb.save('orders.xlsx')
+     
+    for g in range (2,Bestellung.max_row+1):
+        Geburtstdatum = Bestellung['C'+str(g)].value
+        #Geburtstdatum = Geburtstdatum.strftime('%d.%m.%y')
+        #print(Geburtstdatum[5:10])       
+            
+        if Datum == Geburtstdatum[5:10]:
+            neuer_Preis = float(Bestellung['F'+str(g)].value) - float(Bestellung['F'+str(g)].value) * 0.20
+            Bestellung['G1'].value = 'Preis in € mit 20% Rabatt'
+            Bestellung['G'+str(g)].value = str(round(neuer_Preis,2))
+            #print('Hier steht der neue Preis'+str(neuer_Preis))
+
+    wb.save('orders.xlsx') 
  
     
     # TODO lies beide excel tabellen ein und bestimme den preis pro person, was wer zu zahlen hat
