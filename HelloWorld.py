@@ -31,7 +31,7 @@ def row_and_col_writer():
     ws['C1'].value = 'Irgendwas'
     ws['C2'].value = 'Toll'
     #ws['B100'].value = 'Irgendwas'
-    ws['A50'].value = 'Toll'
+    #ws['A50'].value = 'Toll'
     wb.save('Test.xlsx')
 
 def row_and_col_reader():
@@ -53,17 +53,20 @@ def row_and_col_reader_2():
 
 def internet_solution():
     wb.active
-    last_row = (wb.active.max_row+1)
-    new_row = [cell.value for cell in wb.active[last_row]]
-    print(last_row)
-    print(new_row)
-    if new_row is None:
-            new_row['A' + str(last_row)].value = 'Eintrag'
+    
+    for p in range (1, wb.active.max_column+1):
+        column = [cell.value for cell in wb.active[p]]
+        print ('Spalte' + str(p), column)
+
     for i in range(1, wb.active.max_row+1):
         row = [cell.value for cell in wb.active[i]]
         print("Zeile "+str(i), row)
             
-wb.save('Test.xlsx')           
+    last_row = (wb.active.max_row)
+    new_row =  wb.active[last_row]
+    if new_row[0].value is None:
+        new_row[0].value = input('Bitte gebe etwas ein\n')
+    wb.save('Test.xlsx')           
 
 create_empty_excel_file()
 load_excel_file()
