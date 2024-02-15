@@ -13,7 +13,7 @@ random_values = Utils.RandomValues(1)
 
 
 def create_result():
-    print("Berechne Ergebnis tut gerade noch nix ...")
+    #print("Berechne Ergebnis tut gerade noch nix ...")
     aktuelles_Datum = date.today()
     Datum =aktuelles_Datum.strftime('%m-%d')
     wb = Workbook()
@@ -25,7 +25,7 @@ def create_result():
     #print(Geburtstdatum[4:10])
     for a in range (2,Preise.max_row+1):
         Gericht = Preise['A'+str(a)].value
-        #print(Gericht)
+        print(Gericht)
     
     for b in range (2,Bestellung.max_row+1):
         Gericht_Bestellung = Bestellung['D'+str(b)].value
@@ -37,8 +37,8 @@ def create_result():
             Preis = Preise['B'+str(a)].value * Bestellung['E'+str(b)].value
             Bestellung['F1'].value = 'Preis in €'
             Bestellung['F'+str(b)].value = str(round(Preis,2))
-            print(Preis)
-            #wb.save('orders.xlsx')
+            #print(Preis)
+    #wb.save('orders.xlsx')
      
     for g in range (2,Bestellung.max_row+1):
         Geburtstdatum = Bestellung['C'+str(g)].value
@@ -51,7 +51,8 @@ def create_result():
             Bestellung['G'+str(g)].value = str(round(neuer_Preis,2))
             #print('Hier steht der neue Preis'+str(neuer_Preis))
 
-    wb.save('orders.xlsx') 
+    wb.save('orders.xlsx')
+    print('upated: ' + os.path.abspath('orders.xlsx')) 
  
     
     # TODO lies beide excel tabellen ein und bestimme den preis pro person, was wer zu zahlen hat
@@ -81,11 +82,11 @@ def create_new_orders():
     ws['C1'].value = 'Geburtsdatum'
     ws["D1"].value = "Gericht"
     ws["E1"].value = "Anzahl"
-    for i in range(2, 6):
+    for i in range(2, 60):
         ws['A' + str(i)] = random_values.first_name()
         ws['B' + str(i)].value = random_values.last_name()
         ws['C' + str(i)].value = random_values.date(today=random_values.boolean_value())
-        ws['D' + str(i)].value = Dishes[random_values.int_value(1, len(Dishes) - 1)]
+        ws['D' + str(i)].value = Dishes[random_values.int_value(0, len(Dishes) - 1)]
         ws['E' + str(i)].value = random_values.int_value()
     name_orders = "orders.xlsx"
     wb.save(name_orders)
