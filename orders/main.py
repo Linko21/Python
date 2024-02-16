@@ -23,9 +23,10 @@ def create_result():
     Bestellung = wb['Bestellungen']
     #print(Datum)
     #print(Geburtstdatum[4:10])
+                    
     for a in range (2,Preise.max_row+1):
         Gericht = Preise['A'+str(a)].value
-        print(Gericht)
+        #print(Gericht)
     
     for b in range (2,Bestellung.max_row+1):
         Gericht_Bestellung = Bestellung['D'+str(b)].value
@@ -38,6 +39,13 @@ def create_result():
             Bestellung['F1'].value = 'Preis in €'
             Bestellung['F'+str(b)].value = str(round(Preis,2))
             #print(Preis)
+        
+        elif Gericht_Bestellung != Gericht:
+            for l in range (2,Preise.max_row+1):
+                Gericht_neu = Preise['A'+str(l)].value
+                if Gericht_neu == Gericht_Bestellung:
+                    Preis = Preise['B'+str(l)].value * Bestellung['E'+str(b)].value
+                    Bestellung['F'+str(b)].value = str(round(Preis,2))
     #wb.save('orders.xlsx')
      
     for g in range (2,Bestellung.max_row+1):
