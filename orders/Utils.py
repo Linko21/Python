@@ -33,4 +33,4 @@ class RandomValues:
         return d.strftime('%Y-%m-%d')
 
 
-Dishes = ["Lasagne", "Folienkartoffeln", 'Pizza']
+Dishes = ["Lasagne", "Folienkartoffeln", 'Pizza', 'Burger']
