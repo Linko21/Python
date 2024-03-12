@@ -43,8 +43,10 @@ for set_id, num in card_sets.items():
         
 for p in range (len(data)):
     sub_obj2 = data[p]
-    #print(sub_obj2)
-    ws = wb[str(set_id + ' ' + str(num))] 
+    sheet_name = str(set_id + ' ' + str(num))
+    print("use sheet "+sheet_name+" for "+str(sub_obj2)) # es wird immer das sheet "INK 3" genommen weil set_id immer das letzte element von der for loop davor is
+    # TODO sheet_name korrekt setzen
+    ws = wb[sheet_name]
    
     if set_id in str(sub_obj2):
         for j in range(len(key)):
