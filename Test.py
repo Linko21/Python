@@ -40,13 +40,19 @@ for set_id, num in card_sets.items():
         for k in range (len(key)):
             ws.cell(row = (0 + 1), column = (k + 1), value = key [k]);
             
-        
+     
 for p in range (len(data)):
     sub_obj2 = data[p]
-    #print(sub_obj2)
-    ws = wb[str(set_id + ' ' + str(num))] 
-   
-    if set_id in str(sub_obj2):
+for set_id, num in card_sets.items():
+    print('das hier ist die zweite', set_id)
+    sheet_name = str(set_id + ' ' + str(num))
+    ws = wb [sheet_name]
+    print('das ist hier ist ws', ws)
+    if set_id  in str(sub_obj2):
+        print('Das Funktioniert')
+    else:
+        print('Das Funktioniert nicht')
+        #print('das hier ist die if', set_id)
         for j in range(len(key)):
             key_entry = key[j]
             if key_entry in sub_obj2:
