@@ -21,12 +21,6 @@ data2 = resp2.json()
 keys = set()
 card_sets = dict()
 
-set_id_to_worksheet_name = {
-    "INK": "INK 1",
-    "TFC": "TFC 2",
-    "ROF": "ROF 3"
-}
-
 
 def worksheet_name(card, sets: dict):
     card_set_id = card["Set_ID"]
