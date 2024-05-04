@@ -10,26 +10,15 @@ from downloader import download_data_from_url_to_file
 log = logging.getLogger(__name__)
 
 
-def read_cards_file_content(cards_in_local_file_as_json):
-    f = open(cards_in_local_file_as_json)
+def map_json_file_to_domain_object(local_json_file, mapping_function):
+    f = open(local_json_file)
     entire_json = json.load(f)
-    cards = set()
+    objects = set()
     for json_object in entire_json:
-        card = json_to_card(json_object)
-        cards.add(card)
+        card = mapping_function(json_object)
+        objects.add(card)
     f.close()
-    return cards
-
-
-def read_sets_file_content(sets_in_local_file_as_json):
-    f = open(sets_in_local_file_as_json)
-    entire_json = json.load(f)
-    card_sets = set()
-    for json_object in entire_json:
-        card_set = json_to_card_set(json_object)
-        card_sets.add(card_set)
-    f.close()
-    return card_sets
+    return objects
 
 
 def remove_default_sheet(wb):
@@ -104,7 +93,7 @@ def add_values_to_cell(card, row, ws):
 
 def handle():
     cards_in_local_file_as_json = download_data_from_url_to_file("https://api.lorcana-api.com/cards/all", "cards/cards.json")
-    cards = read_cards_file_content(cards_in_local_file_as_json)
+    cards = map_json_file_to_domain_object(cards_in_local_file_as_json, json_to_card)
     card_sets_in_local_file_as_json = download_data_from_url_to_file("https://api.lorcana-api.com/sets/all", "cards/card_sets.json")
-    card_sets = read_sets_file_content(card_sets_in_local_file_as_json)
+    card_sets = map_json_file_to_domain_object(card_sets_in_local_file_as_json, json_to_card_set)
     write_cards_to_excel(cards, card_sets, "cards/cards.xlsx")
