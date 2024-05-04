@@ -43,16 +43,12 @@ for set_id, num in card_sets.items():
      
 for p in range (len(data)):
     sub_obj2 = data[p]
-for set_id, num in card_sets.items():
-    print('das hier ist die zweite', set_id)
     sheet_name = str(set_id + ' ' + str(num))
-    ws = wb [sheet_name]
-    print('das ist hier ist ws', ws)
-    if set_id  in str(sub_obj2):
-        print('Das Funktioniert')
-    else:
-        print('Das Funktioniert nicht')
-        #print('das hier ist die if', set_id)
+    print("use sheet "+sheet_name+" for "+str(sub_obj2)) # es wird immer das sheet "INK 3" genommen weil set_id immer das letzte element von der for loop davor is
+    # TODO sheet_name korrekt setzen
+    ws = wb[sheet_name]
+   
+    if set_id in str(sub_obj2):
         for j in range(len(key)):
             key_entry = key[j]
             if key_entry in sub_obj2:
