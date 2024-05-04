@@ -46,9 +46,9 @@ for p in range (len(data)):
     sheet_name = str(set_id + ' ' + str(num))
     print("use sheet "+sheet_name+" for "+str(sub_obj2)) # es wird immer das sheet "INK 3" genommen weil set_id immer das letzte element von der for loop davor is
     # TODO sheet_name korrekt setzen
-    ws = wb[sheet_name]
+    ws = wb['TFC 1']
    
-    if set_id in str(sub_obj2):
+    if 'TFC' in str(sub_obj2):
         for j in range(len(key)):
             key_entry = key[j]
             if key_entry in sub_obj2:
