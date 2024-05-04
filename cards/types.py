@@ -12,8 +12,8 @@ class Card:
             flavor_text,
             image_url,
             inkable: bool,
-            lore,
-            move_cost,
+            lore: int,
+            move_cost: int,
             name,
             rarity,
             set_id,
@@ -21,7 +21,7 @@ class Card:
             set_num: int,
             strength,
             card_type,
-            willpower
+            willpower: int
     ):
         self.abilities = abilities
         self.artist = artist
@@ -46,7 +46,7 @@ class Card:
         self.willpower = willpower
 
     def __str__(self):
-        return f"{self.name} ({self.set_name})"
+        return f"{self.card_number} {self.name} ({self.set_name})"
 
 
 class CardSet:
