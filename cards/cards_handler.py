@@ -92,8 +92,8 @@ def add_values_to_cell(card, row, ws):
 
 
 def handle():
-    cards_in_local_file_as_json = download_data_from_url_to_file("https://api.lorcana-api.com/cards/all", "cards/cards.json")
+    cards_in_local_file_as_json = download_data_from_url_to_file("https://api.lorcana-api.com/cards/all", "cards/data/cards.json")
     cards = map_json_file_to_domain_object(cards_in_local_file_as_json, json_to_card)
-    card_sets_in_local_file_as_json = download_data_from_url_to_file("https://api.lorcana-api.com/sets/all", "cards/card_sets.json")
+    card_sets_in_local_file_as_json = download_data_from_url_to_file("https://api.lorcana-api.com/sets/all", "cards/data/card_sets.json")
     card_sets = map_json_file_to_domain_object(card_sets_in_local_file_as_json, json_to_card_set)
-    write_cards_to_excel(cards, card_sets, "cards/cards.xlsx")
+    write_cards_to_excel(cards, card_sets, "cards/data/cards.xlsx")

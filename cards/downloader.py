@@ -9,6 +9,9 @@ log = logging.getLogger(__name__)
 
 
 def download_data_from_url_to_file(url, target):
+    parent_dir = os.path.dirname(target)
+    if not os.path.exists(parent_dir):
+        os.makedirs(parent_dir)
     if os.path.isfile(target):
         log.info("file {} already exists, downloaded at {}, reusing this file".format(os.path.abspath(target), time.ctime(os.path.getmtime(target))))
         return target
