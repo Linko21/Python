@@ -1,4 +1,4 @@
-from cards.types import Card, CardSet
+from cards.card_types import Card, CardSet
 
 
 def json_to_card(json_obj):
