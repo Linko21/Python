@@ -6,6 +6,7 @@ from openpyxl import Workbook
 
 from cards.mapper import json_to_card, json_to_card_set
 from downloader import download_data_from_url_to_file
+from logging.config import listen
 
 log = logging.getLogger(__name__)
 
@@ -30,9 +31,13 @@ def write_cards_to_excel(cards, card_sets, target):
     current_row_for_card_set = {card_set.set_id: 2 for card_set in card_sets}
     for card in cards:
         sheet_name = card.set_id + " " + str(card.set_num)
+        #sheet_name = str(card.set_num) + " " + card.set_id
+        #sheet_name = card.set_id
+        index_nr = card.set_num
         if sheet_name not in wb.get_sheet_names():
-            ws = wb.create_sheet(sheet_name)
+            ws = wb.create_sheet(sheet_name, index_nr)
             add_header_to_sheet(ws)
+            wb.get_sheet_names()
         else:
             ws = wb.get_sheet_by_name(sheet_name)
         row = current_row_for_card_set[card.set_id]
@@ -40,8 +45,21 @@ def write_cards_to_excel(cards, card_sets, target):
         current_row_for_card_set[card.set_id] = row + 1
     remove_default_sheet(wb)
     wb.save(target)
-    log.info("wrote cards to %s", os.path.abspath(target))
+    #sortieren_excl_tabs(wb)
+    #sortieren_excel_sheet (ws)
+    log.info("wrote cards to %s and %s", os.path.abspath(target), "Hase")
 
+
+def sortieren_excl_tabs(wb):
+    liste = wb.sheetnames
+    Anzahl_Elemente = len(liste)
+    Index_derliste = liste[-2]
+    print ("Anzahl der Elemente" ,Anzahl_Elemente)
+    print ("Index_derliste" ,Index_derliste)
+    print("Namen: " ,liste)
+    wb._sheets.sort(key = lambda ws: ws.title[0])
+    print ('sortierte Liste', wb.sheetnames)
+    wb.save("cards.xslx")
 
 def add_header_to_sheet(ws):
     ws.cell(row=1, column=1, value="abilities")
@@ -89,6 +107,11 @@ def add_values_to_cell(card, row, ws):
     ws.cell(row, column=19, value=card.strength)
     ws.cell(row, column=20, value=card.card_type)
     ws.cell(row, column=21, value=card.willpower)
+    
+def sortieren_excel_sheet (ws):
+    Spalte_cardnum =ws.cell(row =1, column = 4)
+    len(Spalte_cardnum)
+    print('Hier wird Len ausgegeben', len)
 
 
 def handle():
